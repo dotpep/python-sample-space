@@ -81,8 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "89df39540d8e9fc0",
@@ -161,28 +160,27 @@
   },
   "active": "555c5085e94a4285",
   "lastOpenFiles": [
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1998035670768",
-    "Pasted image 20231021220308.png",
     "week1_module1_intro/notes.md",
+    "src/Pasted image 20231021225228.png",
     "week2_module2_views/notes2.md",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1993898531376",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.3009978049520",
-    "week2_module2_views/demoproject_3/demoapp/form.html",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.2366168048624",
-    "week2_module2_views/demoproject_3/demoapp/templates/form.html",
-    "week2_module2_views/demoproject_3/demoapp/templates",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.2848767420208",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1801878578992",
-    "Pasted image 20231021191018.png",
-    "week2_module2_views/demoproject_3/demoproject_3/__pycache__/urls.cpython-310.pyc.1452521563744",
-    "week2_module2_views/demoproject_3/demoapp/__pycache__/urls.cpython-310.pyc",
-    "Pasted image 20231021180954.png",
-    "Pasted image 20231021180929.png",
-    "Pasted image 20231021180848.png",
-    "Pasted image 20231021180820.png",
-    "Pasted image 20231021180553.png",
-    "Pasted image 20231021180502.png",
-    "Pasted image 20231021180247.png",
-    "Pasted image 20231021180219.png"
+    "week2_module2_views/demoproject_4/demoproject_4/__pycache__/views.cpython-310.pyc.2849565303584",
+    "src/Pasted image 20231022020338.png",
+    "Pasted image 20231022015936.png",
+    "Pasted image 20231022015854.png",
+    "Pasted image 20231022015714.png",
+    "Pasted image 20231022015709.png",
+    "src/Pasted image 20231022015656.png",
+    "src/Pasted image 20231022015353.png",
+    "week2_module2_views/demoproject_4/demoproject_4/__pycache__/views.cpython-310.pyc.1592287683568",
+    "week2_module2_views/demoproject_4/demoproject_4/__pycache__/views.cpython-310.pyc",
+    "src/Pasted image 20231022011249.png",
+    "src/Pasted image 20231022010901.png",
+    "week2_module2_views/demoproject_4/demoproject_4/views.py",
+    "week2_module2_views/demoproject_4/newapp/__pycache__/views.cpython-310.pyc",
+    "week2_module2_views/demoproject_4/newapp/__pycache__/__init__.cpython-310.pyc",
+    "week2_module2_views/demoproject_4/newapp/__pycache__/urls.cpython-310.pyc",
+    "week2_module2_views/demoproject_4/newapp/__pycache__",
+    "week2_module2_views/demoproject_4/newapp/urls.py",
+    "week2_module2_views/demoproject_4/newapp/migrations/__init__.py"
   ]
 }
