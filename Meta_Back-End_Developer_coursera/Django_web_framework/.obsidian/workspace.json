@@ -13,6 +13,18 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "week2_module2_views/notes2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f76f503da6a5f23e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "week1_module1_intro/notes.md",
                 "mode": "source",
                 "source": false
@@ -69,7 +81,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "89df39540d8e9fc0",
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "week1_module1_intro/notes.md",
+                "file": "week2_module2_views/notes2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "week1_module1_intro/notes.md",
+                "file": "week2_module2_views/notes2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "week1_module1_intro/notes.md"
+                "file": "week2_module2_views/notes2.md"
               }
             }
           }
@@ -147,5 +160,29 @@
     }
   },
   "active": "555c5085e94a4285",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1998035670768",
+    "Pasted image 20231021220308.png",
+    "week1_module1_intro/notes.md",
+    "week2_module2_views/notes2.md",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1993898531376",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.3009978049520",
+    "week2_module2_views/demoproject_3/demoapp/form.html",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.2366168048624",
+    "week2_module2_views/demoproject_3/demoapp/templates/form.html",
+    "week2_module2_views/demoproject_3/demoapp/templates",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.2848767420208",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/views.cpython-310.pyc.1801878578992",
+    "Pasted image 20231021191018.png",
+    "week2_module2_views/demoproject_3/demoproject_3/__pycache__/urls.cpython-310.pyc.1452521563744",
+    "week2_module2_views/demoproject_3/demoapp/__pycache__/urls.cpython-310.pyc",
+    "Pasted image 20231021180954.png",
+    "Pasted image 20231021180929.png",
+    "Pasted image 20231021180848.png",
+    "Pasted image 20231021180820.png",
+    "Pasted image 20231021180553.png",
+    "Pasted image 20231021180502.png",
+    "Pasted image 20231021180247.png",
+    "Pasted image 20231021180219.png"
+  ]
 }
