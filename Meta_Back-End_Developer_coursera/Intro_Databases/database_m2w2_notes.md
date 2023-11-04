@@ -309,3 +309,8 @@ DELETE FROM customers WHERE customer_id = 3;
 - how to choose data type for a column in database table
 - python sqlalchemy
 - mysql scripts
+- insert into sql multiple values
+- database management system
+- rdbms
+- sql subsets
+- crud operations
