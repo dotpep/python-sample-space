@@ -1,5 +1,5 @@
 ## Models & Migrations
-Model(MVT architecture django) in application tier and work with data tier (modular classes and methods to perform CRUD operations).
+Model(MVT architecsture django) in application tier and work with data tier (modular classes and methods to perform CRUD operations).
 ![[Pasted image 20231104170114.png|500]]
 
 work with database may achieved in two ways:
@@ -1250,10 +1250,389 @@ urlpatterns = [
 ]
 ```
 
-
 ## Admin
+Django provide future that create administration or admin site as part of application.
+Suppose owner of Little lemon web restaurant want that you develop admin side of website to manipulate database and it can be updated by the restaurant staff.
+- Django unified admin interface. (add, edit, delete)
+- Django admin provides a dashboard where you can add, edit or update, delete.
+- user permissions, group of users and history of changes that user did.
+![[Pasted image 20231107191551.png|300]]
+![[Pasted image 20231107191617.png|400]]
 
-## Database Configuration
+---
+1. `python manage.py migrate`
+2. `python manage.py createsuperuser`
+
+---
+Managing users in Django admin
+
+unregister user
+```python
+from django.contrib.auth.models, import User 
+# Unregister the provided model admin:  
+admin.site.unregister(User)
+```
+register admin 
+```python
+from django.contrib.auth.admin import UserAdmin 
+@admin.register(User) 
+class NewAdmin(UserAdmin): 
+    pass
+```
+prevent any admin user from changing content of one or more fields of a model.
+- `UserAdmin` class has a property called `readonly_fields`. You can specify a list of fields that you want the user (or a super user) to be prevented from modifying.
+- User model has field `date_joined`. Suppose you want that new user should never be changed. So, keep this field in the `readonly_fields` list.
+- Modify the app’s admin.py by changing the NewAdmin class as follows.
+```python
+from django.contrib.auth.admin import UserAdmin 
+@admin.register(User) 
+class NewAdmin(UserAdmin): 
+    readonly_fields = [ 
+        'date_joined', 
+    ]
+```
+If any user accidentally modifies the username field of the other user, it may create many problems. Like the other user may not be able to log in. (solutions is rest this privilege only with the super user and nobody else.)
+- `UserAdmin` class (the base class for `NewAdmin` class that you have registered in the admin site) has a method known as `get_form()`. You need to override it to disable the username field in it.
+- Next, verify if the current user is a super user. If yes, disable the username field in the form.
+```python
+from django.contrib.auth.admin import UserAdmin
+@admin.register(User)
+class NewAdmin(UserAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        is_superuser = request.user.is_superuser
+        
+        if not is_superuser:
+            form.base_fields['username'].disabled = True
+
+        return form
+```
+- If you now log in as a `staff` user and try to modify the username of another user, it will not be allowed.
+models.py
+```python
+from django.db import models 
+
+class Person(models.Model): 
+    last_name = models.TextField() 
+    first_name = models.TextField()
+```
+admin.py
+```python
+from .models import Person 
+admin.site.register(Person)
+```
+- admin interface: myapp that shows count of our Person object (1), use `__str__` for show string record of Person object by creating method in Person. (models.py myapp)
+- customized string representation of the object
+```python
+def __str__(self): 
+        return f"{self.last_name}, {self.first_name}"
+```
+To further customize how the models are displayed in the admin interface, decorate a subclass of `ModelAdmin` and register it with `@admin.register()` decorator (just as you did with `UserAdmin`). Set the `list_display` attribute of this class to display the fields in columns.
+```python
+from django.contrib import admin
+from .models import Person
+@admin.register(Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ("last_name", "first_name")
+```
+
+#### Little Lemon Reservation system in admin
+
+models.py
+```python
+class Reservation(models.Model):
+    name = models.CharField(max_length=50, blank=True)
+    contact = models.CharField('Phone number', max_length=20)
+    date_time = models.DateTimeField()
+    count_quest = models.IntegerField()
+    notes = models.TextField(max_length=300, blank=True)
+
+    def __str__(self):
+        return f"{self.name}, {self.contact}, {self.date_time}, {self.count_quest}, {self.notes}"
+```
+admin.py (project)
+```python
+INSTALLED_APPS = [
+    'myapp.apps.MyappConfig',
+]
+```
+- `python manage.py makemigrations`
+- `python manage.py migrate`
+- `python manage.py createsuperuser` (admin, 1234)
+admin.py (myapp)
+```python
+from myapp.models import Reservation
+#admin.site.register(Reservation)
+
+@admin.register(Reservation)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ("name", "contact", "date_time", "count_quest", "notes")
+```
+
+#### Permissions
+User and model permissions in django - control users are allowed to do which actions.
+- authentication
+- authorization
+
+django group - list of permission assigned to one or more users
+
+Type:
+- Superuser - top level admin (staff by default)
+- Staff user - access django admin interface
+- User - everyone else is irregular user by default (not authorized to use admin site)
+python objects, specific type of user is characterized by special attribute that are set inside user object.
+
+- `python manage.py shell`
+```shell
+>>> from django.contrib.auth.models import User
+>>> usr = User.objects.create_user('testusr', 'test@abc.com', 'pass123')
+>>> usr.is_staff=True
+>>> usr.save()
+```
+- `python manage.py createsuperuser --username=john --email=john@admin.com`
+
+![[Pasted image 20231107212456.png|600]]
+![[Pasted image 20231107212547.png|300]]
+
+Does a user have permission? use `has_perm()`
+![[Pasted image 20231107212645.png|600]]
+
+---
+**Enforcing Permissions**
+
+If a model requires a user to gain access through special permissions, this can be granted through Django Admin.
+
+*Model Permissions in Admin Interface
+custom permission*
+```python
+class Product(models.Model): 
+    ProductID: models.IntegerField() 
+    name : models.TextField() 
+    category : models.TextField
+     
+    class Meta: 
+        permissions = [('can_change_category', 'Can change category')]
+```
+
+*Enforcing permissions at the view level*
+If a user has logged in and has been authenticated, its details are available to the view function in the form of `request.user` object. If not, the value of `request.user` is an instance of `AnonymousUser`. In that case, the permission to call a view can be denied as follows:
+```python
+from django.core.exceptions import PermissionDenied  
+def myview(request): 
+    if request.user.is_anonymous(): 
+        raise PermissionDenied()
+```
+Alternatively, you can decorate the view with a `login_required` decorator. It only allows access for logged users.
+```python
+from django.http import HttpResponse 
+from django.contrib.auth.decorators import login_required 
+@login_required 
+def myview(request): 
+    return HttpResponse("Hello World")
+```
+Let’s define a function `testpermission()`. It returns True if the user is authenticated and has a `change_category` permission.
+```python
+def testpermission(user):
+	if user.is_authenticated() and user.has_perm("myapp.change_category"): 
+		return True 
+	else: 
+		return False
+```
+This function is then used as an argument to the `@user_passes_test()` decorator. The view function defined below it will be invoked if the `testpermission()` function returns True.
+```python
+from django.contrib.auth.decorators import user_passes_test 
+@user_passes_test(testpermission) 
+def change_ctg(request): 
+    #Logic for making change to category of product model instance
+```
+Another method to enforce permission at the view level is with the `@permission_required()` decorator. Unless the user possesses the permission mentioned as an argument, the view function won’t be called.
+```python
+from django.contrib.auth.decorators import permission_required
+@permission_required("myapp.change_category") 
+def store_creator(request): 
+    # Logic for making change to category of product model instance
+```
+Assuming that a product model is present in `models.py`. The `ProductListView` class view renders a list of products only if the user has view permission on this model.
+```python
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.views.generic import ListView 
+from .models import Product 
+
+class ProductListView(PermissionRequiredMixin, ListView): 
+    permission_required = "myapp.view_product" 
+    template_name = "product.html" 
+    model = Product
+```
+
+*Enforcing permissions in Template*
+```html
+<html> 
+<body> 
+{% if user.is_authenticated %} 
+         {#  to be rendeed if the user has been authenticated  #}
+    {% endif %}  
+<body>
+</html>
+```
+```html
+<html> 
+<body> 
+{% if perms.myapp.change_category %} 
+  {#  To be rendered for users having required permission #} 
+   {% endif %} 
+<body> 
+</html>
+```
+
+*Enforcing permissions in URL patterns*
+```python
+from django.conf.urls import url 
+from django.contrib.auth.decorators import login_required, permission_required 
+
+urlpatterns = [ 
+    url(r'^users_only/', login_required(myview)), 
+    url(r'^category/', permission_required('myapp.change_category', login_url='login')(myview)), 
+]
+```
+
+---
+Users and Permissions
+![[Pasted image 20231107215050.png|600]]
+
+model admin class mothod
+![[Pasted image 20231107215202.png|200]]
+
+user objects
+- group
+- permissions - store and reference a single or multiple permission object, set(), add(), remove(), clear()
+
+---
+
+#### labs
+
+models.py
+```python
+from django.db import models
+
+# Create your models here.
+class Employee(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    role = models.CharField(max_length=100)
+    shift = models.IntegerField()
+
+    def __str__(self):
+        return self.first_name
+```
+admin.py
+```python
+from django.contrib import admin
+from .models import Employee
+
+# Register your models here.
+admin.site.register(Employee)
+```
+terminal
+```python
+# Command to perform migrations
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+# Command to run server
+python3 manage.py runserver
+
+# Command to create a super user
+python3 manage.py createsuperuser
+```
+
+## Database Configuration (MySQL)
+by default django database configuration - SQLite (user-friendly and doesn't require config) 
+SQLite for:
+- small project
+- rapid prototype
+
+more Scalable or robust database like MySQL or (PostgreSQL, MariaDB, Oracle).
+![[Pasted image 20231107223057.png|600]]
+![[Pasted image 20231107223136.png|600]]
+![[Pasted image 20231107223153.png|600]]
+deliberate security measure:
+![[Pasted image 20231107223217.png|400]]
+![[Pasted image 20231107223231.png|600]]
+
+---
+![[Pasted image 20231107223552.png|400]]
+
+---
+**Install MySQL DB API Driver**
+To interface a Python program with MySQL, ensure you have a DB API-compliant driver. There are a number of Python drivers for MySQL available. Django recommends `mysqlclient` to be used. Install it with pip installer.
+- `pip3 install mysqlclient`
+(any python three database connector libraries that compatible with Django)
+
+You must configure at least one database in the `DATABASES` variable. For the configuration of the first database, its name should be `default`.
+- `create database mydatabase;`
+- `show databases;`
+- `CREATE USER 'admindjango'@'localhost' IDENTIFIED BY 'password';`
+- `GRANT ALL ON *.* TO 'admindjango'@'localhost';`
+- `flush privileges;`
+The settings include the **database engine**, name of the database, username, and password, along with the host IP address. This defaults to the localhost 127.0.0.10 and the port defaults to 3306.
+```python
+DATABASES = {   
+    'default': {   
+        'ENGINE': 'django.db.backends.mysql',   
+        'NAME': 'mydatabase',   
+        'USER': 'root',   
+        'PASSWORD': '',   
+        'HOST': '127.0.0.1',   
+        'PORT': '3306',   
+        'OPTIONS': {   
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"   
+        }   
+    }   
+}
+```
+- `sql_mode`: The session SQL mode will be set to the given string. It defaults to `STATIC_TRANS_TABLES` to prevent invalid or missing values from being stored in the database.
+- default-character-set: The character set to be used. Default is utf8.
+- `read_default_file`: MySQL configuration file to read.
+- `init_command`: Initial command to issue to the server upon connection.
+
+#### lab
+settings.py
+```python
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'feedback',
+        'HOST' : '127.0.0.1',
+        'PORT' : '3306',
+        'USER' : 'root',
+        'PASSWORD' : '',
+    }
+}
+
+
+INSTALLED_APPS = [
+    'myapp.apps.MyappConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+```shell
+>>> python manage.py makemigrations
+>>> python manage.py migrate
+```
+```mysql
+mysql -u root -p
+SHOW DATABASES;
+CREATE DATABASE feedback;
+```
+
 
 ## SRC
 Models & Migrations
@@ -1291,3 +1670,29 @@ Models and Forms
 - django forms and model form
 - django templates
 - django form API
+
+---
+Admin
+- [django-admin and manage.py – official documentation](https://docs.djangoproject.com/en/4.1/ref/django-admin/ "Django official documentation page - overview on django.admin and manage.py")
+- [Using the Django authentication system](https://docs.djangoproject.com/en/4.1/topics/auth/default/ "Django official documentation page - Using the django authentication system")
+- [Django Admin site – MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Admin_site "Django official documentation page - Django tutorial for admin site")
+- [Django Admin-site – Comprehensive](https://docs.djangoproject.com/en/4.1/ref/contrib/admin/ "Django official documentation page - The django admin site")
+- [Django permissions – TestDriven](https://docs.djangoproject.com/en/4.1/topics/auth/customizing/ "Django official documentation page -Customizing authentication in Django")
+
+- django restaurant admin side of website
+- django admin permissions
+- django admin interface filter code for myapp model (database)
+
+---
+Database Configuration
+- [Databases – Django official](https://docs.djangoproject.com/en/4.1/ref/databases/ "Django official documentation page - Databases")
+- [MySQL notes – Django official](https://docs.djangoproject.com/en/4.1/ref/databases/#mysql-notes "Django official documentation page - MySQL notes")
+- [Installing MySQL Client](https://docs.djangoproject.com/en/4.1/ref/databases/#mysql-db-api-drivers "Django official documentation page - MySQL DB API drivers")
+- [Installing MySQL on MacOS](https://dev.mysql.com/doc/refman/5.7/en/macos-installation.html "Installing MySQL on MacOS")
+- [Installing MySQL on Windows](https://dev.mysql.com/doc/refman/5.7/en/windows-installation.html "Installing MySQL on Microsoft Windows")
+- [Installing and configuring MySQL with Django](https://docs.djangoproject.com/en/4.1/ref/databases/#mysql-notes "Django official documentation page - MySQL Notes")
+
+- [Django - Introduction to PostgreSQL (w3schools.com)](https://www.w3schools.com/django/django_db_postgresql_intro.php)
+- [MySQL Joins (w3schools.com)](https://www.w3schools.com/mysql/mysql_join.asp)
+- mysql create user query
+- mysql DCL and TCL query subsets
