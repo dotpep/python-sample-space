@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>List of Languages</h1> 
+<ul> 
+    {% for lang in langs %} 
+    <li>{{ lang }}</li> 
+    {% endfor %} 
+</ul> 
+
+<h1>Sorted List of Languages using:</h1>
+<h3>forloop.counter or .revcounter, .first, .last,</h3>
+<ul> 
+    {% for lang in langs %} 
+    <li>{{ forloop.counter }} : {{ lang }}</li> 
+    {% endfor %}  
+</ul> 
+
+</body>
+</html>

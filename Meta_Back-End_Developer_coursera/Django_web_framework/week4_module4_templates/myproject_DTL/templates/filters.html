@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h4> {{ key | default:"in key of value there is nothing" | title }} </h4>
+
+    <h4> {{ words | join:"_" | lower }} </h4>
+
+    <h4> {{ name | upper }}  </h4>
+    <h4> {{ name | wordcount }} </h4>
+    <h4> {{ name | length }}  </h4>
+
+    <h4> {{ list | first }} </h4>
+    <h4> {{ list | last }} </h4>
+
+</body>
+</html>

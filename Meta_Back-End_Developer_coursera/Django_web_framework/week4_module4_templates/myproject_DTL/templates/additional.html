@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4> % csrf_token % - form template as protection to prevent <br> Cross Site Request Forgeries (CSRF) <br> generates a token on the server-side</h4>
+    <h3> {% csrf_token %} </h3>
+
+    {% comment "this is my comment" %} 
+
+    <h4> {% csrf_token %} </h4>
+    <p>This tag is used in a form template as protection to prevent Cross Site Request Forgeries (CSRF). 
+        This tag generates a token on the server-side to make sure to cross-check that the incoming requests do not contain the token. 
+        If found, they are not executed. </p> 
+    {% endcomment %} 
+
+    {% include "include_sample.html" %}
+
+
+    {% comment "this is my comment" %}
+
+    <h3> This tag sets a local variable that is available between % with % and % endwidth % tags. </h3>
+    {% with rate = 5 %} 
+    Interest = { amt }*{{ rate }} 
+    {% endwith %} 
+
+    {% endcomment %} 
+
+</body>
+</html>
