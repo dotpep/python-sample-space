@@ -1,0 +1,10 @@
+{% include "navigation_bar.html" %}
+
+<ul>   
+    {% for object in object_list %}   
+    <li>Name: {{ object.name }}</li>   
+    <li>Email: {{ object.email }}</li>   
+    <li>Contact: {{ object.contact }}</li>  
+    <br/> 
+    {% endfor %}   
+</ul> 

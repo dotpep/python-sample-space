@@ -173,7 +173,7 @@ The URL pattern treats the identifiers in angular brackets (<..>) as the path pa
 - path - Matches any non-empty string and includes the path separator, '/'.
 
 #### Dynamic URLs path:
-![[Pasted image 20231021220308.png|400]]
+![[Pasted image 20231021220308.png|600]]
 
 ```python
 urlpatterns = [
