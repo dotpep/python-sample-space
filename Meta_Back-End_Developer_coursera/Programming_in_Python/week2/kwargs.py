@@ -1,0 +1,12 @@
+def sum_of(**kwargs):
+    # print(type(kwargs))
+    sum = 0
+    for k, v in kwargs.items():
+        sum += v
+    return round(sum, 2)
+
+
+print(sum_of(coffee=2.99, cake=4.55, juice=2.99))
+
+order_dict = dict(tea=1.99, salad=6.40)
+print(sum_of(**order_dict))
