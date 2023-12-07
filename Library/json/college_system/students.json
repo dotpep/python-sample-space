@@ -1,0 +1,32 @@
+{
+    "12345": {
+        "name": "Alexandr",
+        "group": "cs20",
+        "grades": {
+            "Math": [85, 67, 90],
+            "English": [91, 95, 93],
+            "Science": [65, 72, 89],
+            "History": [82, 85, 88]
+        }
+    },
+    "21234": {
+        "name": "Kata",
+        "group": "ph21",
+        "grades": {
+            "Math": [80, 78, 95],
+            "English": [92, 95, 90],
+            "Science": [80, 85, 96],
+            "History": [92, 97, 95]
+        }
+    },
+    "31234": {
+        "name": "Sebas",
+        "group": "cs21",
+        "grades": {
+            "Math": [92, 96, 90],
+            "English": [90, 92, 90],
+            "Science": [92, 90, 93],
+            "History": [95, 94, 97]
+        }
+    }
+}
