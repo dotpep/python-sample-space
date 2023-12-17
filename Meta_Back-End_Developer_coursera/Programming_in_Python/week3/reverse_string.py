@@ -49,6 +49,7 @@ def reversed2(variable):
 # print(rev2)
 
 
+# using recursion
 def reversed3(variable):
     if len(variable) == 1:
         return variable
@@ -69,3 +70,7 @@ def reversed4(variable):
 # slicing
 n = input()[::-1]
 print(n)
+
+rev_fu = ''.join([x for x in reversed(input())])
+rev_fu2 = ''.join((list(reversed("123"))))
+print(rev_fu)
