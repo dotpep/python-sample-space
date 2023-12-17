@@ -394,7 +394,7 @@ Surname:         Johann
 # Concatenation
 a = "my favorite food is "
 b = "mashed potatoes"
-# You then print these strings together with this line:
+# You then print these strings together with self line:
 # is called Concatenation
 print(a + b)
 > my favorite food is mashed potatoes
@@ -443,26 +443,27 @@ is Converting data type into another (for example: database purpose)
 - `set()` - converts an Iterable into a Set.
 - `list()`- converts an Iterable into a List.
 - `dict()`
+
 ```python
-print(ord('A'))  
+print(ord('A'))
 # Output: 65
 
-print(hex(255))  
+print(hex(255))
 # Output: '0xff'
 
-print(oct(8))  
+print(oct(8))
 # Output: '0o10'
 
-print(tuple([1, 2, 3]))  
+print(tuple([1, 2, 3]))
 # Output: (1, 2, 3)
 
-print(set([1, 2, 2, 3, 3, 3]))  
+print(set([1, 2, 2, 3, 3, 3]))
 # Output: {1, 2, 3}
 
-print(list((1, 2, 3)))  
+print(list((1, 2, 3)))
 # Output: [1, 2, 3]
 
-print(dict([('one', 1), ('two', 2), ('three', 3)]))  
+print(dict([('one', 1), ('two', 2), ('three', 3)]))
 # Output: {'one': 1, 'two': 2, 'three': 3}
 
 ---
@@ -475,20 +476,18 @@ num1_int = int(num1, 16)  # 255
 num2_int = int(num2, 16)  # 192
 
 # Now you can add them
-sum = num1_int + num2_int
-print(sum)  # Output: 447
-
-
+sum_of = num1_int + num2_int
+print(sum_of)  # Output: 447
 
 ---
 my_list = ['apple', 'banana', 'cherry']
 my_dict = {"key1": my_list[0]}
-print(my_dict)  
+print(my_dict)
 # Output: {'key1': 'apple'}
 
 my_list = ['apple', 'banana', 'cherry']
 my_dict = {f'key_{i}': my_list[i] for i in range(len(my_list))}
-print(my_dict)  
+print(my_dict)
 # Output: {'key0': 'apple', 'key1': 'banana', 'key2': 'cherry'}
 
 ```
@@ -968,7 +967,7 @@ favorites = ['Creme Brulee', 'Apple', 'Churros', 'Chocolate']
   
 count = 0  
 while count < len(favorites):  
-print(f"I like this desert {favorites[count]}")  
+print(f"I like self desert {favorites[count]}")  
 count += 1
 ```
 
@@ -1288,15 +1287,3 @@ print(count)
 
 
 
-
-
-
-
-
-
-
----
-Function (or method) in python
-```python
-
-```

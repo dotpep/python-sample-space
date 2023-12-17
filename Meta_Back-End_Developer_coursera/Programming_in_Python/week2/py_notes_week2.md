@@ -1183,7 +1183,7 @@ print(get_employee_from_dict(12458, "name"));
 ```
 
 ```python
-# this return error
+# self return error
 employee_dict = {
     22458: {
         "id": "12458",
