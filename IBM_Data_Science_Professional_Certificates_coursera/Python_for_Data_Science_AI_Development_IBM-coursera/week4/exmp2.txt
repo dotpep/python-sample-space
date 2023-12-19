@@ -1,0 +1,6 @@
+writen pattern:
+Line1
+Line2
+append pattern: 
+Line3B
+Line4A

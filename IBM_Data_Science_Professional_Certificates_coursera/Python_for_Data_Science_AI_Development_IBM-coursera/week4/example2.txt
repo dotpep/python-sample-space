@@ -1,0 +1,5 @@
+Line of A
+Line of B
+Line of C
+
+This is Append2 with (n - register in front) Lines
