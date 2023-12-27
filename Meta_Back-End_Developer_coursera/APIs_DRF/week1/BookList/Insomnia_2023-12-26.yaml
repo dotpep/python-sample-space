@@ -1,0 +1,180 @@
+_type: export
+__export_format: 4
+__export_date: 2023-12-26T17:28:37.701Z
+__export_source: insomnia.desktop.app:v8.5.1
+resources:
+  - _id: req_c52933e4ef1d450d9f64578839cf6374
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703611584802
+    created: 1703611552891
+    url: http://127.0.0.1:8000/api/books/3
+    name: show specific book
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.5.1
+    authentication: {}
+    metaSortKey: -1703611552891
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_558455ed5c764447bcf36f29bb13a357
+    parentId: null
+    modified: 1703605074617
+    created: 1703605074617
+    name: BookListAPI (APIs meta coursera)
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_18275c7769d14899989cff9fc863314a
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703607753051
+    created: 1703607710660
+    url: http://127.0.0.1:8000/api/books/6
+    name: delete book
+    description: ""
+    method: DELETE
+    body: {}
+    parameters:
+      - id: pair_a5e0bdc6d27a4ed09016f2a060af4daf
+        name: ""
+        value: ""
+        description: ""
+    headers:
+      - name: User-Agent
+        value: insomnia/8.5.1
+    authentication: {}
+    metaSortKey: -1703607710660
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_80a34402f19b482d84ff580687a7c1fa
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703611549287
+    created: 1703605999856
+    url: http://127.0.0.1:8000/api/books/11/
+    name: update specific book data
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title":"seconds",
+        	"author": "second",
+        	"price": "100"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.5.1
+    authentication: {}
+    metaSortKey: -1703605999856
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b619265a1eaf422fa2da00f4db884bfb
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703611533418
+    created: 1703605156425
+    url: http://127.0.0.1:8000/api/books/
+    name: create new book data
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+            "title": "NameBook first",
+            "author": "Author first",
+            "price": "19.99"
+        }
+    parameters:
+      - id: pair_eecebd8e1ae4495bbe7ba4f5c88ad0ca
+        name: ""
+        value: ""
+        description: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.5.1
+    authentication: {}
+    metaSortKey: -1703605156425
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b7295a908220456a8568c9642b694862
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703611544830
+    created: 1703605084311
+    url: http://127.0.0.1:8000/api/books/
+    name: show all books
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.5.1
+      - id: pair_b74a6c4e3fbe46a6b29d9779abefa8ef
+        name: ""
+        value: ""
+        description: ""
+    authentication: {}
+    metaSortKey: -1703605084311
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_b15f22099179b6e4941a33397f71aa8be04a771a
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703605074619
+    created: 1703605074619
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1703605074619
+    _type: environment
+  - _id: jar_b15f22099179b6e4941a33397f71aa8be04a771a
+    parentId: wrk_558455ed5c764447bcf36f29bb13a357
+    modified: 1703605074621
+    created: 1703605074621
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
